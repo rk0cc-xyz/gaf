@@ -8,7 +8,7 @@ import (
 
 // AA structure contains raw data from database.
 type DatabaseFieldContainer struct {
-	page      uint64
+	page      int64
 	content   []byte
 	updatedAt string
 }
@@ -16,14 +16,14 @@ type DatabaseFieldContainer struct {
 // An interface for handling read and write data between the container and database.
 type DataBaseFieldHandler interface {
 	// Handle how the content saved into database.
-	WriteToDB(page uint64, content []byte, updatedAt string) error
+	WriteToDB(page int64, content []byte, updatedAt string) error
 
 	// Handle how to parse data from database.
-	ReadFromDB(page uint64) ([]byte, *string, error)
+	ReadFromDB(page int64) ([]byte, *string, error)
 }
 
 // Construct a field container by providing page and content.
-func CreateDatabaseFieldContainer(page uint64, content []structure.GitHubRepositoryStructure) (*DatabaseFieldContainer, error) {
+func CreateDatabaseFieldContainer(page int64, content []structure.GitHubRepositoryStructure) (*DatabaseFieldContainer, error) {
 	updateTime := time.Now().UTC().Format(time.RFC3339)
 
 	compressedContent, ccerr := compressContent(content)
@@ -39,7 +39,7 @@ func CreateDatabaseFieldContainer(page uint64, content []structure.GitHubReposit
 }
 
 // Get the field data from database with the handler.
-func GetFieldContainerFromDatabase(page uint64, handler DataBaseFieldHandler) (*DatabaseFieldContainer, error) {
+func GetFieldContainerFromDatabase(page int64, handler DataBaseFieldHandler) (*DatabaseFieldContainer, error) {
 	c, u, err := handler.ReadFromDB(page)
 	if err != nil {
 		return nil, err
@@ -53,7 +53,7 @@ func GetFieldContainerFromDatabase(page uint64, handler DataBaseFieldHandler) (*
 }
 
 // Get context page from API.
-func (dfc DatabaseFieldContainer) GetPage() uint64 {
+func (dfc DatabaseFieldContainer) GetPage() int64 {
 	return dfc.page
 }
 
