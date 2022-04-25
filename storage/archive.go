@@ -19,7 +19,7 @@ type DataBaseFieldHandler interface {
 	WriteToDB(page uint64, content []byte, updatedAt string) error
 
 	// Handle how to parse data from database.
-	ReadFromDB() (*uint64, []byte, *string, error)
+	ReadFromDB(page uint64) ([]byte, *string, error)
 }
 
 // Construct a field container by providing page and content.
@@ -39,14 +39,14 @@ func CreateDatabaseFieldContainer(page uint64, content []structure.GitHubReposit
 }
 
 // Get the field data from database with the handler.
-func GetFieldContainerFromDatabase(handler DataBaseFieldHandler) (*DatabaseFieldContainer, error) {
-	p, c, u, err := handler.ReadFromDB()
+func GetFieldContainerFromDatabase(page uint64, handler DataBaseFieldHandler) (*DatabaseFieldContainer, error) {
+	c, u, err := handler.ReadFromDB(page)
 	if err != nil {
 		return nil, err
 	}
 
 	return &DatabaseFieldContainer{
-		page:      *p,
+		page:      page,
 		content:   c,
 		updatedAt: *u,
 	}, nil
