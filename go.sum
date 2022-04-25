@@ -1,0 +1,6 @@
+github.com/17media/structs v0.0.0-20200317074636-7872972ebe57 h1:37pgIfOnYep7tssdIxFq51FH9DwETjTcYH8bkAm2Y8U=
+github.com/17media/structs v0.0.0-20200317074636-7872972ebe57/go.mod h1:OYgQ/75ljAEp1bzyw70wLZ7QC6H3Hm2Li941u3rSXG0=
+github.com/tomnomnom/linkheader v0.0.0-20180905144013-02ca5825eb80 h1:nrZ3ySNYwJbSpD6ce9duiP+QkD3JuLCcWkdaehUS/3Y=
+github.com/tomnomnom/linkheader v0.0.0-20180905144013-02ca5825eb80/go.mod h1:iFyPdL66DjUD96XmzVL3ZntbzcflLnznH0fr99w5VqE=
+github.com/ulikunitz/xz v0.5.10 h1:t92gobL9l3HE202wg3rlk19F6X+JOxl9BBrCCMYEYd8=
+github.com/ulikunitz/xz v0.5.10/go.mod h1:nbz6k7qbPmH4IRqmfOplQw/tblSgqTqBwxkY0oWt/14=
