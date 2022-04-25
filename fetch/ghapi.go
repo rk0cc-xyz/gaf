@@ -152,7 +152,7 @@ func (graf GitHubRepositoryAPIFetch) downloadREST(page uint64) (*http.Response, 
 	param["sort"] = graf.Setting.OrderBy
 	param["direction"] = graf.Setting.OrderSort
 
-	cru := []string{fetch_url}
+	cru := make([]string, 0)
 	for k, v := range param {
 		cru = append(cru, strings.Join([]string{
 			k,
@@ -160,7 +160,7 @@ func (graf GitHubRepositoryAPIFetch) downloadREST(page uint64) (*http.Response, 
 		}, "="))
 	}
 
-	comp_req_url := strings.Join(cru, "&")
+	comp_req_url := fetch_url + "&" + strings.Join(cru, "&")
 
 	client := &http.Client{
 		Timeout: 10 * time.Second,
