@@ -173,7 +173,7 @@ func (graf GitHubRepositoryAPIFetch) downloadREST(page uint64) (*http.Response, 
 
 	req.Header.Set("User-Agent", "Mozilla 5.0")
 	req.Header.Set("Accept", "application/vnd.github.v3+json")
-	req.Header.Set("Authorization", graf.token)
+	req.Header.Set("Authorization", "token "+graf.token)
 
 	return client.Do(req)
 }
