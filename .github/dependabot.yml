@@ -1,0 +1,8 @@
+version: 1
+updates:
+  - package-ecosystem: gomod
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      time: "15:00"
+      timezone: "Asia/Hong_Kong"
