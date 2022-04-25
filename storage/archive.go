@@ -24,8 +24,6 @@ type DataBaseFieldHandler interface {
 
 // Construct a field container by providing page and content.
 func CreateDatabaseFieldContainer(page int64, content []structure.GitHubRepositoryStructure) (*DatabaseFieldContainer, error) {
-	updateTime := time.Now().UTC().Format(time.RFC3339)
-
 	compressedContent, ccerr := compressContent(content)
 	if ccerr != nil {
 		return nil, ccerr
@@ -34,7 +32,7 @@ func CreateDatabaseFieldContainer(page int64, content []structure.GitHubReposito
 	return &DatabaseFieldContainer{
 		page:      page,
 		content:   compressedContent,
-		updatedAt: updateTime,
+		updatedAt: time.Now().UTC().Format(time.RFC3339),
 	}, nil
 }
 
