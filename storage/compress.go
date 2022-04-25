@@ -3,6 +3,7 @@ package storage
 import (
 	"bytes"
 	"encoding/json"
+	"io"
 
 	"github.com/rk0cc-xyz/gaf/structure"
 	"github.com/ulikunitz/xz"
@@ -33,19 +34,19 @@ func compressContent(content []structure.GitHubRepositoryStructure) ([]byte, err
 
 // Decompress XZ to content.
 func decompressContent(compressed []byte) ([]structure.GitHubRepositoryStructure, error) {
-	var buf bytes.Buffer
-
-	xzr, xzrerr := xz.NewReader(&buf)
+	xzr, xzrerr := xz.NewReader(bytes.NewBuffer(compressed))
 	if xzrerr != nil {
 		return nil, xzrerr
 	}
-	if _, xzrrerr := xzr.Read(compressed); xzrrerr != nil {
-		return nil, xzrrerr
+
+	dcxzr, dcxzrerr := io.ReadAll(xzr)
+	if dcxzrerr != nil {
+		return nil, dcxzrerr
 	}
 
 	var grsa []structure.GitHubRepositoryStructure
 
-	if uerr := json.Unmarshal(buf.Bytes(), &grsa); uerr != nil {
+	if uerr := json.Unmarshal(dcxzr, &grsa); uerr != nil {
 		return nil, uerr
 	}
 
